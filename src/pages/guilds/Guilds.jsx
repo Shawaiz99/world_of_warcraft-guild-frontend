@@ -21,7 +21,7 @@ function Guilds() {
     <div className="container mt-5 text-center">
       <h2>Guilds Page</h2>
       {userInfo ? (
-        <p className="text-muted">👋 Welcome back, {userInfo.sub}</p>
+        <p className="text-muted">Welcome back, {userInfo.sub}</p>
       ) : (
         <p className="text-danger">No user information found.</p>
       )}
