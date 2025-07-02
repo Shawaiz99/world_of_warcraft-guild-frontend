@@ -1,10 +1,15 @@
-import { Navigate } from 'react-router';
-import { useGlobalStore } from '../hooks/useGlobalStore';
+import { Navigate } from "react-router-dom";
 
 function ProtectedRoute({ children }) {
-  const { store } = useGlobalStore();
-  if (!store.user?.isAuthenticated) return <Navigate to="/" />;
-  return <>{children}</>;
+  const token = localStorage.getItem("token");
+
+  // If no token, redirect to login
+  if (!token) {
+    return <Navigate to="/login" replace />;
+  }
+
+  // If token exists, allow access to the route
+  return children;
 }
 
 export default ProtectedRoute;
