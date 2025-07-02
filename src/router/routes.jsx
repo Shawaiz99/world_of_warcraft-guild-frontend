@@ -1,21 +1,28 @@
-import { createBrowserRouter } from 'react-router';
-import RootLayout from './RootLayout.jsx';
-import ErrorPage from './ErrorPage.jsx';
-import Home from '../pages/home/Home.jsx';
-import About from '../pages/about/About.jsx';
-import Demo from '../pages/demo/Demo.jsx';
+import { createBrowserRouter } from "react-router-dom";
+import RootLayout from "./RootLayout.jsx";
+import ErrorPage from "./ErrorPage.jsx";
+import Login from "../pages/login/Login.jsx";
+import Guilds from "../pages/guilds/Guilds.jsx";
+import ProtectedRoute from "./ProtectedRoute.jsx";
 
 export const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <RootLayout />, // Layout wrapping the nested routes
     errorElement: <ErrorPage />, // Fallback for routing errors when not valid route
     children: [
       // Define individual routes for the application
-      { index: true, element: <Home /> },
-      { path: '/home', element: <Home /> },
-      { path: '/about', element: <About /> },
-      { path: '/demo', element: <Demo /> },
+      { index: true, element: <Login /> },
+      { path: "/login", element: <Login /> },
+      // { path: "/guilds", element: <Guilds /> },
+      {
+        path: "/guilds",
+        element: (
+          <ProtectedRoute>
+            <Guilds />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
 ]);
